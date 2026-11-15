@@ -18,7 +18,19 @@ class MemberStats(BaseModel):
     total_words: int = 0
     total_chars: int = 0
     media_count: int = 0
-    vocab_size: int = 0  # Count of distinct words used by this member
+    vocab_size: int = 0
+    
+    @property
+    def vocabulary_size(self) -> int:
+        return self.vocab_size  # Count of distinct words used by this member
+
+    @property
+    def words_per_message(self) -> float:
+        return self.avg_words_per_message
+
+    @property
+    def longest_yap_streak(self) -> int:
+        return self.max_consecutive_messages
     
     # Verbosity
     avg_words_per_message: float = 0.0
@@ -68,6 +80,14 @@ class GroupStats(BaseModel):
     
     # Vocabulary & Top Words
     group_vocab_size: int = 0  # Count of distinct words used across the entire group
+    
+    @property
+    def vocabulary_size(self) -> int:
+        return self.group_vocab_size
+
+    @property
+    def top_words(self) -> list:
+        return self.top_20_words
     top_20_words: List[Tuple[str, int]] = Field(default_factory=list)
     
     # Distributions
