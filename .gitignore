@@ -1,0 +1,25 @@
+# Private chat exports
+chats/
+
+# Environment & secrets
+.env
+
+# Python Virtual Environment
+.venv/
+venv/
+ENV/
+
+# Python cache & build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Runtime generated reports & artifacts
+artifacts/
+outputs/
+reports/
+
+# OS metadata
+.DS_Store
+Thumbs.db
