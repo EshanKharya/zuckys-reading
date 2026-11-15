@@ -5,7 +5,7 @@ import math
 import random
 from datetime import datetime, date
 from typing import List, Tuple
-from src.models import StaticAnalysisReport, MemberStats, GroupStats
+from src.common.models import StaticAnalysisReport, MemberStats, GroupStats
 
 def generate_distinct_colors(n: int) -> List[str]:
     """
@@ -23,7 +23,7 @@ def generate_distinct_colors(n: int) -> List[str]:
     return colors
 
 def get_icon_base64() -> str:
-    icon_path = os.path.join(os.path.dirname(__file__), "..", "assets", "icon.webp")
+    icon_path = os.path.join(os.path.dirname(__file__), "..", "..", "assets", "icon.webp")
     if os.path.exists(icon_path):
         with open(icon_path, "rb") as f:
             encoded = base64.b64encode(f.read()).decode("utf-8")

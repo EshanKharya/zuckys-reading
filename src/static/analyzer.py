@@ -4,7 +4,7 @@ from collections import Counter, defaultdict
 from typing import List, Dict, Tuple, Set, Optional
 import emoji
 
-from src.models import Message, MemberStats, GroupStats, StaticAnalysisReport
+from src.common.models import Message, MemberStats, GroupStats, StaticAnalysisReport
 
 # Words/tokens indicating dry texting
 DRY_WORDS = {"k", "ok", "okay", "haan", "han", "hmm", "hm", "cool", "ha", "achha", "accha", "shi", "sahi", "nice", "yes", "no", "nah"}

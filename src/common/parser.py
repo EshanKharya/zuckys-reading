@@ -2,7 +2,7 @@ import re
 import os
 from datetime import datetime
 from typing import List, Tuple, Optional
-from src.models import Message
+from src.common.models import Message
 
 # Matches standard WhatsApp export line:
 # e.g.: "08/04/26, 8:45 pm - " or "11/11/2026, 10:33 PM - "

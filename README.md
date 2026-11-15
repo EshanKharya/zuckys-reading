@@ -15,14 +15,24 @@ An unfiltered WhatsApp chat analyzer that parses exported group chats (`.txt`) a
   pip install -r requirements.txt
   ```
 
+## Configuration
+Copy `.env.example` to `.env` and set your chat export path and subsystem toggles:
+```bash
+cp .env.example .env
+```
+
+Key variables in `.env`:
+- `CHAT_EXPORT_PATH`: Path to WhatsApp chat export `.txt` file
+- `ENABLE_STATIC_ANALYSIS`: Enable/disable static analysis (`true`/`false`)
+- `ENABLE_SEMANTIC_ANALYSIS`: Enable/disable semantic analysis (`true`/`false`)
+- `MODEL_NAME`: Local LLM model (default: `qwen2.5:7b`)
+
 ## How to Run
+Run the pipeline with zero arguments:
 ```bash
-python main.py --chat "chats/<chat_export_file>.txt"
+python main.py
 ```
-Or specify a custom output path:
-```bash
-python main.py --chat "chats/<chat_export_file>.txt" --out "reports/custom_report.html"
-```
+Reports are automatically generated and saved to `reports/Zucky_read_<chat_name>.html`.
 
 ## License & Copyright
 Copyright © 2026 Eshan Kharya. All rights reserved.  
