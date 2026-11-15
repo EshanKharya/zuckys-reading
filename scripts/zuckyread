@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# Zucky's Reading - CLI Entrypoint
+# Executes main.py using the workspace virtual environment (.venv)
+# ==============================================================================
+
+set -e
+
+# Resolve repository root directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+cd "${PROJECT_ROOT}"
+
+# Prefer workspace .venv if present
+if [ -f "${PROJECT_ROOT}/.venv/bin/python" ]; then
+    PYTHON_BIN="${PROJECT_ROOT}/.venv/bin/python"
+elif [ -n "$VIRTUAL_ENV" ]; then
+    PYTHON_BIN="python"
+elif command -v python3 >/dev/null 2>&1; then
+    PYTHON_BIN="python3"
+else
+    PYTHON_BIN="python"
+fi
+
+exec "${PYTHON_BIN}" main.py "$@"

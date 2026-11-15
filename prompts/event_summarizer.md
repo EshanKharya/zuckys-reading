@@ -48,3 +48,4 @@ Analyze the compressed conversation chunk below. Produce a strictly valid JSON r
    - Score every user code present in the User Mapping based on message volume, drive, emotional weight, and conversational dominance in this specific event.
 3. **Anonymization Invariant:** Refer to participants **ONLY** by their `%U#%` user codes in all fields except when quoting directly. Never invent real names.
 4. Output **ONLY** the raw JSON object. Do not wrap in markdown code blocks or add preamble prose.
+

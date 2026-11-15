@@ -275,3 +275,4 @@ class SemanticPreprocessor:
                 event_counter += 1
 
         return compressed_events
+

@@ -35,3 +35,4 @@ Output a strictly valid JSON response matching this schema:
 2. Only add truly canon lore that other members would reference in future conversations.
 3. Prune outdated, trivial, or resolved trivia to keep total memory under 200 words.
 4. Output **ONLY** the raw JSON object with no wrapping or commentary.
+

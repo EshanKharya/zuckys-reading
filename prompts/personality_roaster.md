@@ -42,3 +42,4 @@ Analyze the new events in the context of the member's prior actions and baseline
 1. Refer to the member by their `%U#%` code throughout the analysis.
 2. In the roast, explicitly weave in callbacks to specific high-impact event IDs (`E#`).
 3. Output **ONLY** the raw JSON object.
+

@@ -23,3 +23,4 @@ def load_prompt_template(prompt_name: str, **kwargs: Any) -> str:
             content = content.replace(placeholder, str(val))
 
     return content
+

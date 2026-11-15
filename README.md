@@ -32,9 +32,17 @@ Key variables in `.env`:
 ## How to Run
 Run the pipeline with zero arguments:
 ```bash
+./scripts/zuckyread
+```
+Or directly with Python:
+```bash
 python main.py
 ```
 Reports are automatically generated and saved to `reports/Zucky_read_<chat_name>.html`.
+
+## Helper Scripts (`scripts/`)
+- **`./scripts/zuckyread`**: One-click execution script that activates `.venv` and runs `main.py`.
+- **`./scripts/check_llm_config`**: Diagnostic tool that tests the configured LLM endpoint, checks health, and sends a test prompt to measure latency.
 
 ## License & Copyright
 Copyright © 2026 Eshan Kharya. All rights reserved.  

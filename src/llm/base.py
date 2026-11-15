@@ -29,3 +29,4 @@ class BaseLLMClient(ABC):
     def health_check(self) -> bool:
         """Checks if the provider service is reachable."""
         pass
+

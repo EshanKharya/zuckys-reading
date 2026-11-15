@@ -36,3 +36,4 @@ Synthesize the full group trajectory into a master psychological dossier and col
 1. Ground the roast in specific events and real interaction dynamics observed across the chat.
 2. Refer to members by their `%U#%` codes and events by their `E#` IDs.
 3. Output **ONLY** the raw JSON object.
+

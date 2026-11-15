@@ -147,3 +147,4 @@ def get_llm_client(provider: Optional[str] = None) -> BaseLLMClient:
         return MockLLMClient()
     else:
         raise ValueError(f"Unsupported LLM provider: '{selected_provider}'. Supported: 'ollama', 'mock'.")
+
