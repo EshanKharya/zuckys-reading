@@ -24,3 +24,7 @@ Or specify a custom output path:
 python main.py --chat "chats/<chat_export_file>.txt" --out "reports/custom_report.html"
 ```
 
+## License & Copyright
+Copyright © 2026 Eshan Kharya. All rights reserved.  
+This project is proprietary and confidential. Not open source. Commercial or public distribution without explicit written permission is strictly prohibited.
+
