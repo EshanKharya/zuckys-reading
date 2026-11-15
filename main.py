@@ -41,7 +41,7 @@ def run_pipeline():
 
         os.makedirs(config.REPORTS_DIR, exist_ok=True)
         output_report = os.path.join(config.REPORTS_DIR, f"Zucky_read_{group_name}.html")
-        report_path = generate_html_report(static_report, output_report)
+        report_path = generate_html_report(static_report, output_report, release_version=config.APP_VERSION)
         print(f"[🎉] Interactive HTML Report generated at: {report_path}")
 
     # 3. Semantic Analysis Subsystem (Multi-Agent Pipeline)

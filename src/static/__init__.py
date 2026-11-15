@@ -5,3 +5,4 @@ __all__ = [
     "StaticAnalyzer",
     "generate_html_report",
 ]
+

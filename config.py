@@ -8,6 +8,7 @@ load_dotenv()
 # ==========================================
 # Runtime Environment Settings (.env)
 # ==========================================
+APP_VERSION: str = os.getenv("APP_VERSION", "v1.0")
 CHAT_EXPORT_PATH: str = os.getenv("CHAT_EXPORT_PATH", "chats/WhatsApp Chat with BTC sher 🦁.txt")
 ENABLE_STATIC_ANALYSIS: bool = os.getenv("ENABLE_STATIC_ANALYSIS", "true").strip().lower() in ("true", "1", "yes")
 ENABLE_SEMANTIC_ANALYSIS: bool = os.getenv("ENABLE_SEMANTIC_ANALYSIS", "false").strip().lower() in ("true", "1", "yes")
@@ -46,3 +47,4 @@ OUTPUTS_DIR: str = "outputs"
 ARTIFACTS_DIR: str = "artifacts"
 ASSETS_DIR: str = "assets"
 PROMPTS_DIR: str = "prompts"
+
