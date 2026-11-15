@@ -10,7 +10,10 @@ An unfiltered WhatsApp chat analyzer that parses exported group chats (`.txt`) a
 
 ## Requirements
 - Python 3.10+
-- Dependencies: `pydantic`, `emoji`
+- Install dependencies:
+  ```bash
+  pip install -r requirements.txt
+  ```
 
 ## How to Run
 ```bash
@@ -20,3 +23,4 @@ Or specify a custom output path:
 ```bash
 python main.py --chat "chats/<chat_export_file>.txt" --out "reports/custom_report.html"
 ```
+
