@@ -97,9 +97,24 @@ flowchart TD
   - Timestamps removed from message lines; start date/time and duration placed in event header.
 * **Storage:** Persisted to `artifacts/{chat_name}/events/E{id}.txt`.
 
-#### Stage 4: Context Calibration & Memory Subsystem (Two-Pass Engine)
-* **Pass 1 (Group Baseline Anchor):** Before running Agent 1, Python synthesizes a 150-word calibration anchor from static metrics (volume, banter profile, active hours, scoring scale) and injects it into Agent 1's system prompt.
-* **Pass 2 (Rolling State):** Maintains `outputs/{chat_name}/group_memory.json` (inside jokes, ongoing feuds, current era). When an event scores `impact_strength >= 7`, updates `group_memory.json` with new lore. Subsequent agents read this file (~150 tokens) to recognize callbacks.
+#### Stage 4: Context Calibration & Memory Subsystem (Two-Pass Dynamic Decay Engine)
+* **Pass 1 (Zero-Bias Statistical Anchor):** Before running Agent 1, Python deterministically synthesizes a strictly objective mathematical calibration anchor from static metrics (participant count, conversation volume percentiles: 25th, median, 75th, 90th, average message length, daytime vs night distribution, response speed). It contains zero editorializing or genre assumptions, leaving tone and relationship discovery solely to the LLM.
+* **Pass 2 (Adaptive Rolling Memory & Size-Class Decay Schedule):** Maintains `outputs/{chat_name}/group_memory.json` (inside jokes, ongoing feuds, active eras). Instead of a static threshold, the trigger threshold dynamically decays based on chat size classes:
+  - **Chat Size Classes:**
+    - `XS`: $< 1,000$ messages
+    - `S`: $< 5,000$ messages
+    - `M`: $< 10,000$ messages
+    - `L`: $< 20,000$ messages
+    - `XL`: $\ge 20,000$ messages
+  - **Coefficients:**
+    - Message ratio $k = 0.05$
+    - Bootstrap multiplier $\alpha$: XS=16 (80%), S=10 (50%), M=4 (20%), L=2 (10%), XL=1 (5%)
+    - Calibration multiplier $\beta$: XS=4 (20%), S=5, M=6, L=5, XL=4
+  - **Formulas:**
+    - Bootstrap threshold ($T=1$): $\text{alpha\_messages} = \alpha \times k \times \text{total\_messages}$
+    - Calibration threshold ($T=5$): $\text{beta\_messages} = (\text{total\_messages} - \text{alpha\_messages}) \times k \times \beta$
+    - Canon stability threshold ($T=7$): Remaining messages after bootstrap and calibration.
+  - Subsequent agents read `group_memory.json` (~150 tokens) to recognize callbacks without parallel GPU execution.
 
 #### Stage 5: Multi-Agent Analysis Pipeline
 * **Prompt Loading:** System prompts dynamically loaded at runtime from `prompts/*.md`.
@@ -218,11 +233,21 @@ The generated HTML report must feature a polished dark-mode navigation bar with 
 - **Noise Stripping:** Completely remove `<Media omitted>`, `This message was deleted`, and system notices (`added`, `left`, `changed group name/icon`).
 - **Persistence:** Save compressed event texts to `artifacts/{chat_name}/events/E{id}.txt`.
 
-### [REQ-SEM-02] Two-Pass Baseline & Rolling Group Memory
-- **Pass 1 (Group Baseline Anchor):** Generate a 150-word group calibration anchor from static metrics (volume, banter level, top vocabulary, active hours, member hierarchy) and inject into Agent 1's system prompt so it understands the group's "normal".
-- **Pass 2 (Rolling State):** Maintain `outputs/{chat_name}/group_memory.json` tracking active eras, inside jokes, and alliances/feuds.
-- Whenever an event scores `impact_strength >= 7`, update `group_memory.json`.
-- Subsequent agents read `group_memory.json` to ground their roasts in group lore without context overflow.
+### [REQ-SEM-02] Two-Pass Dynamic Baseline & Adaptive Memory Decay Schedule
+- **Pass 1 (Zero-Bias Statistical Anchor):** Generate a purely objective, mathematical calibration anchor from static metrics:
+  - Participant counts (total and active)
+  - Conversation volume percentiles ($25^{\text{th}}$, median, $75^{\text{th}}$, $90^{\text{th}}$)
+  - Typical message length and response speeds
+  - Day vs night activity breakdown
+  - Explicit instruction to make zero assumptions about group genre, tone, or intimacy level.
+- **Pass 2 (Adaptive Rolling Memory Decay):** Maintain `outputs/{chat_name}/group_memory.json` tracking active eras, inside jokes, and alliances/feuds.
+- **Dynamic Size-Class Memory Schedule:**
+  - Chat size categorized into `XS` (<1k), `S` (<5k), `M` (<10k), `L` (<20k), and `XL` (20k+).
+  - Configurable parameters: `MESSAGE_RATIO_K = 0.05`, $\alpha$ multipliers, $\beta$ multipliers.
+  - Phase 1 (Bootstrap, Threshold = 1): Runs on all events until cumulative messages reach $\text{alpha\_messages} = \alpha \times k \times \text{total\_messages}$.
+  - Phase 2 (Calibration, Threshold = 5): Runs on events until cumulative messages reach $\text{alpha\_messages} + \text{beta\_messages}$, where $\text{beta\_messages} = (\text{total\_messages} - \text{alpha\_messages}) \times k \times \beta$.
+  - Phase 3 (Canon Stability, Threshold = 7): Events after calibration update only if `impact_strength >= 7`.
+- **Validation Contract:** `scripts/check_config` validates that $(\alpha + \beta) \times k \le 1.0$ across all size classes, ensuring bootstrap and calibration do not exceed 100% of messages.
 
 ### [REQ-SEM-03] Agent 1: Event Summarizer
 - Evaluates compressed events one by one (stateless).

@@ -42,7 +42,7 @@ Reports are automatically generated and saved to `reports/Zucky_read_<chat_name>
 
 ## Helper Scripts (`scripts/`)
 - **`./scripts/zuckyread`**: One-click execution script that activates `.venv` and runs `main.py`.
-- **`./scripts/check_llm_config`**: Diagnostic tool that tests the configured LLM endpoint, checks health, and sends a test prompt to measure latency.
+- **`./scripts/check_config`**: Comprehensive diagnostic tool validating mathematical thresholds & memory coefficients, environment settings, and local LLM connectivity/latency.
 
 ## License & Copyright
 Copyright © 2026 Eshan Kharya. All rights reserved.  

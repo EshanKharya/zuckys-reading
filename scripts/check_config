@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# Zucky's Reading - LLM Connection Checker Runner
+# Zucky's Reading - System & Configuration Validator Runner
 # ==============================================================================
 
 set -e
@@ -20,4 +20,4 @@ else
     PYTHON_BIN="python"
 fi
 
-exec "${PYTHON_BIN}" scripts/check_llm_config.py "$@"
+exec "${PYTHON_BIN}" scripts/check_config.py "$@"
