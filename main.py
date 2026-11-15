@@ -5,6 +5,7 @@ from typing import Optional
 import config
 from src.common import WhatsAppParser
 from src.static import StaticAnalyzer, generate_html_report
+from src.semantic import SemanticPreprocessor
 
 def run_pipeline():
     chat_file = config.CHAT_EXPORT_PATH
@@ -48,7 +49,11 @@ def run_pipeline():
     if config.ENABLE_SEMANTIC_ANALYSIS:
         print("\n--- [Stage: Multi-Agent Semantic Analysis] ---")
         print(f"[*] Target Model: {config.MODEL_NAME} via {config.LLM_PROVIDER}")
-        print("[ℹ️] Semantic analysis subsystem is scheduled for release in Phase 3 & 4.")
+        print("[*] Running Semantic Preprocessor (2h gap delimitation, %U#% user codes, %% merging, emoji compression)...")
+        preprocessor = SemanticPreprocessor(inactivity_gap_hours=config.INACTIVITY_GAP_HOURS)
+        compressed_events = preprocessor.process_and_save(group_name, messages)
+        print(f"[+] Preprocessing complete: {len(compressed_events)} events saved to 'artifacts/{group_name}/events/E*.txt'")
+        print("[ℹ️] Multi-agent orchestration (Agents 1-4) will execute in Phase 4.")
 
     print("\n" + "=" * 60)
     print("  PIPELINE EXECUTION COMPLETE")

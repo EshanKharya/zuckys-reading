@@ -6,6 +6,8 @@ An unfiltered WhatsApp chat analyzer that parses exported group chats (`.txt`) a
 - **Deterministic Static Metrics:** Verbosity, response speeds (text only), Yap Streak (consecutive text runs, media excluded), Sahara Desert Index (dry text percentage), and vocabulary sizes.
 - **Group Analytics:** 24-hour hourly distribution, weekday patterns, monthly volume progression, and active/inactive streaks with exact dates.
 - **Word Cloud:** Top 20 most frequent words placed via golden-angle spiral vector SVG.
+- **Semantic Preprocessing Engine:** 2-hour conversational event chunking, alphabetical `%U#%` user anonymization, `%%` message merging, and contiguous emoji compression (`%{emoji}x{count}%`). Saves dense event chunks to `artifacts/<group>/events/E<id>.txt`.
+- **Editable Markdown Prompts:** Agent definitions externalized into runtime-loaded markdown files in `prompts/`.
 - **Interactive Report:** Single-file responsive dashboard (`reports/Zucky_read_<chat_name>.html`) powered by Tailwind CSS and Chart.js.
 
 ## Requirements
